@@ -1,19 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System;
 
 public class Player : MonoBehaviour
 {
-    public Transform player;
-    // Start is called before the first frame update
+    public Rigidbody rb;
+    public float movementForce = 45f;
+
     void Start()
     {
-
+        rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        player.position = new Vector3(player.position.x, player.position.y + .1f, player.position.z);
+        rb.velocity = new Vector3(0, 0, 0);
+        if (Input.GetKey("right"))
+        {
+            Debug.Log("right");
+            rb.AddForce(new Vector3(75000 * Time.deltaTime, 0, 0));
+        }
+        if (Input.GetKey("left"))
+        {
+            Debug.Log("left");
+            rb.AddForce(new Vector3(-75000 * Time.deltaTime, 0, 0));
+        }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+
+    }
+
 }
