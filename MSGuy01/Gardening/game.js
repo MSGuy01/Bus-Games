@@ -1,12 +1,22 @@
-const canvas = document.getElementsByTagName("canvas")[0];
-const ctx = canvas.getContext('2d');
-let image = new Image();
-image.src = "player.png"
-ctx.drawImage(image, 0, 0, 200, 100, 1, 1, 200, 100)
+const canvasobj = document.getElementsByTagName("canvas")[0];
+console.log(canvasobj);
+var ctx = canvasobj.getContext('2d');
+ctx.fillStyle = 'red';
+ctx.stroke();
+ctx.rect(10, 10, 10, 10);
+/*var image = new Image();
+image.src = "flower.png";
+var spriteWidth = 350,
+spriteHeight = 170,
+pixelsLeft = 170,
+pixelsTop = 10,
+canvasPosX = 20,
+canvasPosY = 20;
+ctx.drawImage(image, pixelsLeft, pixelsTop, spriteWidth, spriteHeight, canvasPosX, canvasPosY, spriteWidth, spriteHeight);
 let i = 0;
 function Draw() {
     i++;
     ctx.fillStyle = 'red';
-    ctx.ellipse(i, i, i, i, 0, 0, 0, false);
+    ctx.rect(10, 10, 10, 10);
 }
-window.setInterval(Draw, 1);
+window.setInterval(Draw, 1);*/
