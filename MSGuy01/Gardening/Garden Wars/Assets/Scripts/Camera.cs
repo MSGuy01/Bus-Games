@@ -21,20 +21,23 @@ public class Camera : MonoBehaviour
         camera.position = player.position + playerfollow;
         if (Input.GetKey("f"))
         {
-            if (! isFP)
-            {
-                Invoke("switchFP(true)", 1);
-                playerfollow = new Vector3(0, 4, 0);
-            }
-            else
-            {
-                Invoke("switchFP(false)", 1);
-                playerfollow = new Vector3(1, 4, -9); 
-            }
+            switchFP(false);
+        }
+        if (Input.GetKey("t"))
+        {
+            switchFP(true);
         }
     }
     void switchFP(bool s)
     {
         isFP = s;
+        if (s)
+        {
+            playerfollow = new Vector3(1, 4, -9);
+        }
+        else
+        {
+            playerfollow = new Vector3(0, 4, 0);
+        }
     }
 }
