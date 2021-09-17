@@ -7,16 +7,22 @@ using System;
 public class Player : MonoBehaviour
 {
     public Rigidbody rb;
-    public Transform playerTransform;
     public Vector3 spawn;
-    public int jumpForce = 5000;
+    public int jumpForce = 2000;
     public int moveForce = 75000;
+    public GameObject varm;
+    public Transform seed;
+    public Manager m;
+    public Transform sickle;
 
     void Start()
     {
+        Debug.Log("START");
         spawn = new Vector3(0, 3, 0);
         rb = GetComponent<Rigidbody>();
-        playerTransform = GetComponent<Transform>();
+        varm = GameObject.Find("Variable Manager");
+        m = varm.GetComponent<Manager>();
+        transform.position = spawn;
     }
 
     void FixedUpdate()
@@ -40,18 +46,52 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKey("space"))
         {
-            rb.AddForce(new Vector3(0, jumpForce * Time.deltaTime, 0));
+            if (transform.position.y <= 3)
+            {
+                rb.AddForce(new Vector3(0, jumpForce * Time.deltaTime, 0));
+            }
+        }
+        if (Input.GetKey("s"))
+        {
+            if (m.seeds >= 1)
+            {
+                Debug.Log("use seed");
+                Debug.Log(m.seeds);
+                m.seeds--;
+                Instantiate(seed, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z + 5), Quaternion.identity);
+            }
+            else {
+                Debug.Log("Not enough seeds!");
+                Debug.Log(m.seeds);
+            }
         }
 
-        if (playerTransform.position.y < 0)
+        if (Input.GetKey("w"))
         {
-            playerTransform.position = spawn;
+            while (sickle.rotation.x > -90) 
+            {
+                sickle.rotation = new Quaternion(sickle.rotation.x - 1, sickle.rotation.y, sickle.rotation.z, sickle.rotation.w);
+            }
+            while (sickle.rotation.x < 0)
+            {
+                //sickle.rotation = new Quaternion(sickle.rotation.x + 1, sickle.rotation.y, sickle.rotation.z, sickle.rotation.w);
+            }
+        }
+
+        if (transform.position.y > 2.4)
+        {
+            transform.position = new Vector3(transform.position.x, 2.5f, transform.position.z);
+        }
+        if (transform.position.x < -48 || transform.position.x > 46 || transform.position.z < -48 || transform.position.z > 46)
+        {
+            transform.position = spawn;
         }
     }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name == "store")
         {
+            DontDestroyOnLoad(varm);
             SceneManager.LoadScene("store");
         }
     }
