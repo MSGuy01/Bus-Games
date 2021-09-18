@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using System;
 
 public class Player : MonoBehaviour
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour
     public Transform seed;
     public Manager m;
     public Transform sickle;
+    public Text loadingText;
 
     void Start()
     {
@@ -91,6 +93,7 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.name == "store")
         {
+            loadingText.text = "Loading...";
             DontDestroyOnLoad(varm);
             SceneManager.LoadScene("store");
         }
