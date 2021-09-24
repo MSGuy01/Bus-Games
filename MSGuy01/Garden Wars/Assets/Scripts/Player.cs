@@ -68,18 +68,6 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (Input.GetKey("w"))
-        {
-            while (sickle.rotation.x > -90) 
-            {
-                sickle.rotation = new Quaternion(sickle.rotation.x - 1, sickle.rotation.y, sickle.rotation.z, sickle.rotation.w);
-            }
-            while (sickle.rotation.x < 0)
-            {
-                //sickle.rotation = new Quaternion(sickle.rotation.x + 1, sickle.rotation.y, sickle.rotation.z, sickle.rotation.w);
-            }
-        }
-
         if (transform.position.y > 2.4)
         {
             transform.position = new Vector3(transform.position.x, 2.5f, transform.position.z);
